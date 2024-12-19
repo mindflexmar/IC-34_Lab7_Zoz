@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Handling and DOM Manipulation</title>
+</head>
+<body>
+    <h1>Завдання №1</h1>
+    <input type="text" id="inputField" placeholder="Type something here...">
+    <button id="showButton">SHOW ME</button>
+
+    <script>
+        const inputField = document.getElementById('inputField');
+        const showButton = document.getElementById('showButton');
+        showButton.addEventListener('click', () => {
+            console.log(inputField.value);
+        });
+    </script>
+</body>
+</html>

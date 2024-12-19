@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle Text Visibility</title>
+</head>
+<body>
+    <h1>ЗАВДАННЯ 3</h1>
+
+    <input type="text" id="inputField" value="" placeholder="Type something here...">
+    <button id="toggleButton">Приховати</button>
+
+    <script>
+        // Select elements
+        const inputField = document.getElementById('inputField');
+        const toggleButton = document.getElementById('toggleButton');
+        let isHidden = false;
+
+        // Event listener for the toggle button
+        toggleButton.addEventListener('click', () => {
+            if (isHidden) {
+                inputField.type = 'text';
+                toggleButton.textContent = 'Приховати';
+            } else {
+                inputField.type = 'password';
+                toggleButton.textContent = 'Розкрити';
+            }
+            isHidden = !isHidden;
+        });
+    </script>
+</body>
+</html>

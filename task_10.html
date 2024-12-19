@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #controls {
+            margin-bottom: 20px;
+        }
+        #controls input {
+            width: 50px;
+            margin-right: 10px;
+        }
+        #boxes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        #boxes div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div id="controls">
+  <input type="number" min="1" max="100" step="1" />
+  <button type="button" data-create>Create</button>
+  <button type="button" data-destroy>Destroy</button>
+</div>
+
+<div id="boxes"></div>
+
+<script>
+    function getRandomHexColor() {
+        return `#${Math.floor(Math.random() * 16777215)
+          .toString(16)
+          .padStart(6, 0)}`;
+    }
+
+    const controls = document.getElementById('controls');
+    const input = controls.querySelector('input');
+    const createButton = controls.querySelector('[data-create]');
+    const destroyButton = controls.querySelector('[data-destroy]');
+    const boxesContainer = document.getElementById('boxes');
+
+    createButton.addEventListener('click', () => {
+        const amount = parseInt(input.value.trim(), 10);
+        if (isNaN(amount) || amount < 1 || amount > 100) {
+            alert('Please enter a number between 1 and 100.');
+            return;
+        }
+        createBoxes(amount);
+        input.value = '';
+    });
+
+    destroyButton.addEventListener('click', destroyBoxes);
+
+    function createBoxes(amount) {
+        destroyBoxes();
+        const elements = [];
+        let size = 30;
+        for (let i = 0; i < amount; i++) {
+            const box = document.createElement('div');
+            box.style.width = `${size}px`;
+            box.style.height = `${size}px`;
+            box.style.backgroundColor = getRandomHexColor();
+            box.textContent = `${i + 1}`;
+            elements.push(box);
+            size += 10;
+        }
+        boxesContainer.append(...elements);
+    }
+
+    function destroyBoxes() {
+        boxesContainer.innerHTML = '';
+    }
+</script>
+
+</body>
+</html>
